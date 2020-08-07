@@ -132,4 +132,3 @@ dmypy.json
 mytest_*.py
 tmp_*
 *.bak
-*.sqlite3
