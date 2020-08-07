@@ -1,8 +1,8 @@
-# CS-GY9163-Assignment-02
+# CS-GY9163-Assignment-04
 
-[![Build Status](https://travis-ci.org/qb1ng/CS-GY9163-Assignment-03.svg?branch=master)](https://travis-ci.org/qb1ng/CS-GY9163-Assignment-03)
+[![Build Status](https://travis-ci.org/qb1ng/CS-GY9163-Assignment-04.svg?branch=master)](https://travis-ci.org/qb1ng/CS-GY9163-Assignment-04)
 
-Repo for CS9163 Assignment 02
+Repo for CS9163 Assignment 04
 
 ## Spell-Check Website
 This website is developed with Flask, Python3, and Bootstrap.
@@ -13,7 +13,7 @@ Register, login into the website, and submit text for spell-checking.
 - Install requirements with pip
 
   ```sh
-  pip install -r requirements.txt
+  pip install -r ./src/requirements.txt
   ```
   
 ## Test with unittest
@@ -38,12 +38,12 @@ Register, login into the website, and submit text for spell-checking.
   ```
 
 ## How to use
-1. Open the browser and enter URL http://127.0.0.1:5000/cs9163/hw02/
+1. Open the browser and enter URL http://127.0.0.1:5000/
 2. The URLs available are:
-   1. home: http://127.0.0.1:5000/cs9163/hw02/ &larr; redirect to login page
-   2. login: http://127.0.0.1:5000/cs9163/hw02/login
-   3. register: http://127.0.0.1:5000/cs9163/hw02/register
-   4. spell check: http://127.0.0.1:5000/cs9163/hw02/spell_check &larr; require user login
+   1. home: http://127.0.0.1:5000/ &larr; redirect to login page
+   2. login: http://127.0.0.1:5000/login
+   3. register: http://127.0.0.1:5000/register
+   4. spell check: http://127.0.0.1:5000/spell_check &larr; require user login
 
 ## About testing
 This assignment project has switched from *pytest* to *unittest*.
