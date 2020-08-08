@@ -23,6 +23,15 @@ USER_DATABASE = {}
 
 ROOT_URL = ""
 
+# Get secrets from Docker Secret
+def get_secret_key(secret_name, default_value):
+	try:
+		with open('/run/secrets/{}'.format(secret_name), "r") as fp:
+			return fp.read()
+	except IOError:
+		return default_value
+
+# Configure URLs
 def configure_routes(app):
 
 	# Initialize database
@@ -32,7 +41,10 @@ def configure_routes(app):
 		db.create_all()
 		admin = User(
 			username='admin',
-			password=generate_password_hash('Administrator@1'),
+			password=generate_password_hash(
+				# Get Administrator's password from Docker Secret
+				get_secret_key("admin_password", "Administrator@1")
+			),
 			phone='12345678901',
 			ifAdmin=True
 		)
@@ -285,10 +297,9 @@ def configure_routes(app):
 		if existing_user is None:
 			return (False, "Incorrect")
 		else:
-			password = generate_password_hash(password)
 			# if password != USER_DATABASE[username]["password"]:
 			# if check_password_hash(password, USER_DATABASE[username]["password"]):
-			if check_password_hash(password, existing_user.password):
+			if not check_password_hash(existing_user.password, password):
 				return (False, "Incorrect")
 			# elif phone != USER_DATABASE[username]["phone"]:
 			elif phone != existing_user.phone:
@@ -328,8 +339,11 @@ def configure_routes(app):
 #   - export FLASK_APP=app.py
 #   - flask run
 app = Flask(__name__, template_folder="./templates")
-app.secret_key = "CS9163Assignment02WebsiteFlaskSessionSecretKey"
-app.WTF_CSRF_SECRET_KEY = "CS9163Assignment02WebsiteFlaskWTFCSRFToken"
+
+# app.secret_key = "CS9163Assignment02WebsiteFlaskSessionSecretKey"
+# app.WTF_CSRF_SECRET_KEY = "CS9163Assignment02WebsiteFlaskWTFCSRFToken"
+app.secret_key = get_secret_key("flask_session_secret_key", "DefaultCS9163Assignment04SecretKey")
+app.WTF_CSRF_SECRET_KEY = get_secret_key("flask_wtf_csrf_token", "DefaultCS9163Assignment04SecretKey")
 # Random secret_key does work, but this will lose all existed sessions
 # when current flask application restarts.
 # app.secret_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32))
