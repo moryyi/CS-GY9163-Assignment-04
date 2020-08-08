@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM python:3.6-slim
 
 USER root
 
@@ -6,13 +6,13 @@ ENV LC_ALL C.UTF-8
 
 ENV LANG c.UTF-8
 
-RUN apt-get update && \
-    apt-get install -y software-properties-common
+# RUN apt-get update && \
+#     apt-get install -y software-properties-common
 
-RUN add-apt-repository universe
+# RUN add-apt-repository universe
 
-RUN apt-get update && \
-    apt-get install -y python3.6 python3-pip
+# RUN apt-get update && \
+#     apt-get install -y python3.6 python3-pip
 
 COPY ./spell-check /app/src/spell-check
 
