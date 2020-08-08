@@ -27,4 +27,4 @@ echo CS9163Assignment02WebsiteFlaskWTFCSRFToken | docker secret create flask_wtf
 # src_web : the name of the image should be the same of the image that has been previously built.
 #         src_web is because this image was built according to docker-compose.yml,
 #         where the name is "web".
-docker service create --replicas 4 --limit-cpu 0.25 --limit-memory 100M --secret admin_password --name spell-check-web -p 8080:5000 src_web
+docker service create --replicas 4 --limit-cpu 0.25 --limit-memory 100M --secret admin_password flask_session_secret_key flask_wtf_csrf_token --name spell-check-web -p 8080:5000 src_web:latest
