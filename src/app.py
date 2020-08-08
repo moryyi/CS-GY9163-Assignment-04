@@ -27,7 +27,7 @@ ROOT_URL = ""
 def get_secret_key(secret_name, default_value):
 	try:
 		with open('/run/secrets/{}'.format(secret_name), "r") as fp:
-			return fp.read()
+			return fp.read().strip()
 	except IOError:
 		return default_value
 
